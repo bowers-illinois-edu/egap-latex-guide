@@ -1,6 +1,6 @@
-# cse-latex-202104
+# 10 Things LaTeX Guide
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lukeolson/cse-latex-202104/HEAD?urlpath=lab)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bowers-illinois-edu/egap-latex-guide/HEAD?urlpath=lab)
 
 To build the html file for the EGAP Guide with less typing use R to convert the markdown to html so that the styles look like the other styles of the [EGAP Methods Guides](https://egap.org/methods-guides/) (see also <https://github.com/egap/methods-guides>).
 
