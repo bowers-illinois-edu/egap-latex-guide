@@ -25,13 +25,22 @@ instance available within which you can start a Terminal session so that you
 can type the commands required to build a publication quality pdf from a LaTeX
 file. You can start this environment [here](TODO). 
 
-# The structure of a document
+# Structure and Markup
 
 A LaTeX document (or a `.tex` file) is a [plain
 text](https://en.wikipedia.org/wiki/Plain_text) document that contains commands
-that tell a processing program how to create a beautiful
-pdf. This figure shows a whole LaTeX document and explains at a high level what
-the parts of the document do.
+that tell a processing program how to create a beautiful pdf. These commands
+can be "markup" like `\textbf{this is bold}` for **bold text** or `$\alpha +
+\beta \frac{1}{x^2}$` for math like $\alpha + \beta \frac{1}{x^2}$ or commands
+that tell LaTeX about document structure like `\section{Introduction}` or even
+commands to print all of the bibliography like
+`\bibliography{refs_example.bib}`. 
+
+Once you have a plain text document with markup, you then process it using a
+set of programs to create a publishable output like a `.pdf` file.
+
+This figure shows a whole LaTeX document and explains at a high level what
+the parts of the document do..
 
 ![The Structure of a LaTeX document\label{fig:struct}](document_structure.png)
 
@@ -45,15 +54,14 @@ a pdf file like the following image:
 ## Practice:
 
 What does `example.tex` look like when compiled to a pdf document? Can you add
-a title or author? You can practice by looking at the directory `1_structure`
-in the Jupyter Lab window that launches when you clink on `launch binder` from
-the `README.md` file in the the [associated github
+a title or author? Can you make some text bold?^[Try out `\title{Some Paper}`
+and `\author{Some Person}` *in the preamble* and `\maketitle` just after the
+`\begin{document}` line.] You can practice by looking at the directory
+`1_structure` in the Jupyter Lab window that launches when you clink on `launch
+binder` from the `README.md` file in the the [associated github
 repository](https://github.com/bowers-illinois-edu/egap-latex-guide) and then
 clicking on the `Terminal` icon in the Jupyter Lab pane. Once you are there,
-try typing `latexmk -pdflatex example.tex` and then looking at the pdf. (Try
-out `\title{}` and `\author{}` *in the preamble* and `\maketitle` just after
-the `\begin{document}` line.)
-
+try typing `latexmk -pdflatex example.tex` and then looking at the pdf. 
 
 You can also copy the github repository to your own local machine and launch
 the Terminal to see a Unix command prompt if you are using a Mac or Linux
@@ -61,31 +69,41 @@ machine. Windows machine also offer a unix command prompt, but it is a [bit
 more involved to install
 it](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
+
 # Flavors and Programs: tex, latex,  pdflatex, etc ...
 
-A "LaTeX document" is short-hand for a plain text document written with markup like `\textbf{this is bold}` for **bold text** or `$\alpha + \beta \frac{1}{x^2}$` for math like $\alpha + \beta \frac{1}{x^2}$. Once you have a plain text document with markup, you then process it using a set of programs to create a publishable output like a `.pdf` or `.html` file.
+Although the most basic program that parses markup is called `latex`, in
+current daily use, you will mostly find yourself using `pdflatex` or `xelatex`
+or maybe `lualatex`. 
 
-Although the most basic program that parses such markup is called `tex`, in current daily use, you will mostly find yourself using `pdflatex` or `xelatex` or maybe `lualatex`.
-
-For example, at the Unix command prompt in the Terminal, you might type `pdflatex example.tex` to be
-
-When Donald Knuth created this approach to making beautiful scientific documents, he started with the `tex` program but Leslie Lamport build `latex` by combining multiple `tex` commands into fewer and simpler macros. Both originally created documents in `dvi` or `postscript` format. Nowaways, `pdf` files are the best way to convey a document from one person to another such that the visual formatting stays the same.
+When [Donald Knuth](https://en.wikipedia.org/wiki/Donald_Knuth) created this
+approach to making beautiful scientific documents, he started with the `tex`
+program but [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport)
+built `latex` by combining multiple `tex` commands into fewer and simpler
+macros. Both originally created documents in `dvi` or `postscript` format.
+Nowadays, `pdf` files are the best way to make a document that looks the same
+to all who want to view it on their screens or print it for themselves.
 
 Here is a list of the common programs that one might use to create a pdf file from a latex document:
 
  - `tex`: a program that typesets TeX directives or macros
  - `pdftex`: a program that generates a PDF (instead of DVI)
- - `latex`: a program that typesets a pile of LaTeX macros to make things easier
- - `bibtex`: a program to take bibliographic information from a `.aux` file (created by a run of `latex` or `pdflatex` etc) and to generate a bibliography.
- - `biber`: a program like bibtex but with more bibtex database management capabilities.
+ - `latex`: a program that typesets a pile of LaTeX macros to make things
+   easier
+ - `bibtex`: a program to take bibliographic information from a `.aux` file
+   (created by a run of `latex` or `pdflatex` etc.) and generates a
+   bibliography.
+ - `biber`: a program like bibtex but with more database management
+   capabilities.
  - `pdflatex`: a program that generates a PDF
- - `xelatex`: support for a wide variety of fonts and characters
- - `lualatex`: extends latex more of a programming language (via Lua)
+ - `xelatex`: support for a wide variety of fonts and characters (you can type
+   `xelatex example.tex` after [changing the font](https://www.overleaf.com/learn/latex/XeLaTeX) to one that is installed on
+   your system).
+ - `lualatex`: extends latex so that more programming can be done within it (via Lua for more complicate document designs and workflows. See [here for more on lualatex](https://www.overleaf.com/learn/latex/Articles/An_Introduction_to_LuaTeX_(Part_1):_What_is_it—and_what_makes_it_so_different%3F)).
 
-Two take-aways:
-
- - always use LaTeX: very rarely (if ever) should you need to dip into plain TeX 
- - always use PDF output (pdflatex) and PDF figures (or PNG … more on this later)
+For example, at the Unix command prompt in the Terminal, you might type
+`pdflatex example.tex` create an `example.pdf` file (if you only do it once,
+the citation will show up as a `?` and no bibliography will be printed).
 
 Notice also:
 
@@ -96,11 +114,18 @@ Notice also:
 
  ![From LaTeX to PDF commands \label{fig:flavors}](from_tex_to_pdf.png)
 
-You can replace those multiple lines with a single call to `latexmk example.tex`.
+You can replace those multiple lines with a single call to `latexmk -pdflatex example.tex`.
+
+
+**Two take-aways:**
+
+ - always use LaTeX markup: very rarely (if ever) should you need to dip into plain TeX
+ - always use PDF output (pdflatex) and PDF figures (or PNG ... more on this later) rather than DVI or PS format for sharing documents
+
 
 ## Practice
 
-See the directory `2_texflavors` and the `readme.md` file therein.
+See the directory `2_texflavors` and the `readme.md` file therein. Can you change the font and use `xelatex` to make a pdf, say, trying `latexmk -xelatex example.tex`?
 
 # 3. LaTeX workflows
 
