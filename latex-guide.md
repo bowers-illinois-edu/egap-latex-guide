@@ -8,6 +8,8 @@ secnumdepth: 2
 number-sections: true
 html_document:
   toc: true
+  toc_depth: 1
+  number-sections: true
   theme: journal
 ---
 
@@ -127,7 +129,7 @@ You can replace those multiple lines with a single call to `latexmk -pdflatex ex
 
 See the directory `2_texflavors` and the `readme.md` file therein. Can you change the font and use `xelatex` to make a pdf, say, trying `latexmk -xelatex example.tex`?
 
-# 3. LaTeX workflows
+# LaTeX workflows
 
  - Directory structure: [Zen of Python](https://www.python.org/dev/peps/pep-0020/#id2)
 
@@ -224,7 +226,7 @@ For large edits, take sections at a time, to reduce merge conflicts
 
 See the directory `4_git` and the `readme.md` file therein.
 
-# 5. Journal Style
+# Journal Style
 
 The journal will have a style file
 
@@ -310,7 +312,7 @@ DO use consistent fonts throughout (more on this…)
 
 See the directory `7_dos` and the `readme.md` file therein.
 
-# 8. On bibtex
+# On bibtex
 
 - Bibtex: a program and a format for specifying bibliography entries
 - Journals specify the formatting rules
