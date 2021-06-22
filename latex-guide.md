@@ -11,35 +11,55 @@ html_document:
   theme: journal
 ---
 
-This guide shows you how to write a scientific article using the [LaTeX](https://en.wikipedia.org/wiki/LaTeX) document
-preparation and markup system. We emphasize typing commands at the [unix command
-line](https://en.wikipedia.org/wiki/Unix_shell) in this guide as a way for reader to see what is happening under the hood of
-the LaTeX engine and thus gain flexibility and power over the production of their own academic documents. We provide some links to graphical interfaces to LaTeX at the
-end of the document.
+This guide shows you how to write a scientific article using the
+[LaTeX](https://en.wikipedia.org/wiki/LaTeX) document preparation and markup
+system. We emphasize typing commands at the [unix command
+line](https://en.wikipedia.org/wiki/Unix_shell) in this guide as a way for
+reader to see what is happening under the hood of the LaTeX engine and thus
+gain flexibility and power over the production of their own academic documents.
+We provide some links to graphical interfaces to LaTeX at the end of the
+document.
 
-To help people **practice** these commands we have a [Jupyter Lab](TODO) instance
-available within which you can start a Terminal session so that you can type
-the commands required to build a publication quality pdf from a LaTeX file. You
-can start this environment [here](TODO). 
+To help people **practice** these commands we have a [Jupyter Lab](TODO)
+instance available within which you can start a Terminal session so that you
+can type the commands required to build a publication quality pdf from a LaTeX
+file. You can start this environment [here](TODO). 
 
 # The structure of a document
 
-A LaTeX document (or a `.tex` file) is a [plain text](https://en.wikipedia.org/wiki/Plain_text) document that contains
-commands to the LaTeX processing programs that instruct it how to create a
-beautiful pdf. This figure shows a whole LaTeX document  explains at a high level what the parts of
-the document do.
+A LaTeX document (or a `.tex` file) is a [plain
+text](https://en.wikipedia.org/wiki/Plain_text) document that contains commands
+that tell a processing program how to create a beautiful
+pdf. This figure shows a whole LaTeX document and explains at a high level what
+the parts of the document do.
 
 ![The Structure of a LaTeX document\label{fig:struct}](document_structure.png)
+
+After processing that document (via, say, the command `latexmk -pdflatex
+example.tex`, assuming that the document is called `example.tex`), one can see
+a pdf file like the following image:
+
+![The associated pdf document\label{fig:struct_image}](document_structure_compiled.png){ style="width: 50%; margin: auto; text-align: center;" }
 
 
 ## Practice:
 
-Look at the directory `1_structure` in the [associated github repository](http://) (You can
-practice typing these commands in the command line by clicking on the `launch
-binder` button on that repository, and then clicking on the `Terminal` icon in
-the Jupyter Lab pane.)
+What does `example.tex` look like when compiled to a pdf document? Can you add
+a title or author? You can practice by looking at the directory `1_structure`
+in the Jupyter Lab window that launches when you clink on `launch binder` from
+the `README.md` file in the the [associated github
+repository](https://github.com/bowers-illinois-edu/egap-latex-guide) and then
+clicking on the `Terminal` icon in the Jupyter Lab pane. Once you are there,
+try typing `latexmk -pdflatex example.tex` and then looking at the pdf. (Try
+out `\title{}` and `\author{}` *in the preamble* and `\maketitle` just after
+the `\begin{document}` line.)
 
-You can also copy the github repository to your own local machine and launch the Terminal to see a Unix command prompt if you are using a Mac or Linux machine. Windows machine also offer a unix command prompt, but it is a [bit more involved to install it](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+
+You can also copy the github repository to your own local machine and launch
+the Terminal to see a Unix command prompt if you are using a Mac or Linux
+machine. Windows machine also offer a unix command prompt, but it is a [bit
+more involved to install
+it](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
 # Flavors and Programs: tex, latex,  pdflatex, etc ...
 
