@@ -6,6 +6,7 @@ numbersections: true
 colorlinks: true
 secnumdepth: 2
 number-sections: true
+bibliography: latex-guide.bib
 html_document:
   toc: true
   toc_depth: 1
@@ -52,6 +53,17 @@ a pdf file like the following image:
 
 ![The associated pdf document\label{fig:struct_image}](document_structure_compiled.png){ style="width: 50%; margin: auto; text-align: center;" }
 
+## Takeaways
+
+ - The LaTeX system separates the creation of beautiful documents from the act
+   of efficiently and comfortably typing them.
+ - Typing a document using LaTeX commands involves plain text --- which means
+   that you can type the commands in whatever way feels most efficient and
+   comfortable for you.
+ - Processing a document once typed involves asking a computer to interpret the
+   commands you entered and to produce some output that, ideally (1) will not
+   change when different people view it (since you want control over how your
+   paper looks) and (2) is beautiful. 
 
 ## Practice:
 
@@ -99,9 +111,13 @@ Here is a list of the common programs that one might use to create a pdf file fr
    capabilities.
  - `pdflatex`: a program that generates a PDF
  - `xelatex`: support for a wide variety of fonts and characters (you can type
-   `xelatex example.tex` after [changing the font](https://www.overleaf.com/learn/latex/XeLaTeX) to one that is installed on
-   your system).
- - `lualatex`: extends latex so that more programming can be done within it (via Lua for more complicate document designs and workflows. See [here for more on lualatex](https://www.overleaf.com/learn/latex/Articles/An_Introduction_to_LuaTeX_(Part_1):_What_is_it—and_what_makes_it_so_different%3F)).
+   `xelatex example.tex` after [changing the
+   font](https://www.overleaf.com/learn/latex/XeLaTeX) to one that is installed
+   on your system).
+ - `lualatex`: extends latex so that more programming can be done within it
+   (via Lua for more complicate document designs and workflows. See [here for
+   more on
+   lualatex](https://www.overleaf.com/learn/latex/Articles/An_Introduction_to_LuaTeX_(Part_1):_What_is_it—and_what_makes_it_so_different%3F)).
 
 For example, at the Unix command prompt in the Terminal, you might type
 `pdflatex example.tex` create an `example.pdf` file (if you only do it once,
@@ -109,52 +125,118 @@ the citation will show up as a `?` and no bibliography will be printed).
 
 Notice also:
 
- - `pdflatex` (or `xelatex` or `lualatex`) takes several passes --- must be run more than one time --- if your document involves citations or other more complex features (like cross-references, tables of contents, etc.).
- - Tools like `latexmk` or `latexrun` automate this process of multiple passes by a latex processing program and a bibliography creation program.
+ - `pdflatex` (or `xelatex` or `lualatex`) takes several passes --- must be run
+   more than one time --- if your document involves citations or other more
+   complex features (like cross-references, tables of contents, etc.).
+ - Tools like `latexmk` or `latexrun` automate this process of multiple passes
+   by a latex processing program and a bibliography creation program.
 
- The following figure shows how it may require three runs of `pdflatex` (plus a run of `bibtex`) to go from an `example.tex` file to an `example.pdf` file:
+ The following figure shows how it may require three runs of `pdflatex` (plus a
+ run of `bibtex`) to go from an `example.tex` file to an `example.pdf` file:
 
  ![From LaTeX to PDF commands \label{fig:flavors}](from_tex_to_pdf.png)
 
 You can replace those multiple lines with a single call to `latexmk -pdflatex example.tex`.
 
 
-**Two take-aways:**
+## Take-aways:
 
- - always use LaTeX markup: very rarely (if ever) should you need to dip into plain TeX
- - always use PDF output (pdflatex) and PDF figures (or PNG ... more on this later) rather than DVI or PS format for sharing documents
+ - always use LaTeX markup: very rarely (if ever) should you need to dip into
+   plain TeX
+ - always use PDF output (pdflatex) and PDF figures (or PNG ... more on this
+   later) rather than DVI or PS format for sharing documents
 
 
 ## Practice
 
-See the directory `2_texflavors` and the `readme.md` file therein. Can you change the font and use `xelatex` to make a pdf, say, trying `latexmk -xelatex example.tex`?
+See the directory `2_texflavors` and the `readme.md` file therein. Can you
+change the font and use `xelatex` to make a pdf, say, trying `latexmk -xelatex
+example.tex`?
 
 # LaTeX workflows
 
- - Directory structure: [Zen of Python](https://www.python.org/dev/peps/pep-0020/#id2)
+A given scientific paper will require many files. For example, a research team
+may split the document into multiple  `.tex` files (`intro.tex`, `results.tex`,
+etc.) and then combine them for compilation into one big `main.tex`; many
+papers involve multiple `.pdf` files for figures, `.tex` files for tables, and
+at least one `.bib` file for bibliographies.
+
+For example a `main.tex` file might look like this:
+
+```{latex}
+\documentclass{article}
+\title{My Title}
+\begin{document}
+\maketitle
+\input{abstract}
+\input{intro}
+\input{results}
+...
+\bibliography{mybib.bib}
+\end{document}
+```
+
+But `results.tex` might look like this:
+
+```{latex}
+\section{Results}
+
+Figure~\ref{fig:vaccine_by_pop} shows that opposition to vaccination peaks at a population of 100,000.
+
+\begin{center}
+\begin{figure}[!htb]
+\includegraphics[width=.8\textwidth]{vaccine_by_pop.pdf}
+\caption{Vaccination opposition by population}\label{fig:vaccine_by_pop}
+\end{figure}
+\end{center}
+
+```
+
+That number `100,000` and the figure `vaccine_by_pop.pdf` came from an R
+command file called `vaccine_by_pop.R` which relied on data cleaned by
+`vaccine_data_cleaning.py` plus other files which downloaded data from the web
+and cleaned and merged the data together.
+
+**With so many files, collaborators require guides or maps to understand how files relate to
+each other.**  This is true even if you are mostly going to collaborate with yourself in the future @bowers2016future.
+
+
+There are two main complementary approaches to managing this collaboration [@bowers2016future]:
+ -  "File organization can be a map itself" .
+ -  Provide an input-output map using files like a `Makefile`, `README.md`, `requirements.txt`
+
+## Takeaways
+
+We recommend that:
+
+ 1. you agree upon and commit to one approach for at least one project;
+ 2. that you follow the general advice from the [Zen of Python](https://www.python.org/dev/peps/pep-0020/#id2)
 
 > Simple is better than complex.   
 Complex is better than complicated.   
 Flat is better than nested.   
 
-- Commit to something
+ 3. that you separate:
+  - Data collection or raw data  (e.g.  `data1.csv, …, datan.csv`)
+  - Parsed or processed data (e.g.  `data_merged_filtered.db`)
+  - Plotting data (e.g.  `temp_vs_time.csv`)
+  - Plotting script (e.g.  `temp_vs_time.py`)
 
-- Separate:
-  - Data collection or raw data  (e.g.  ## data1.db, … ## datan.db)
-  - Parsed or processed data (e.g.  data_merged_filtered.db)
-  - Plotting data (e.g.  temp_vs_time.csv)
-  - Plotting script (e.g.  temp_vs_time.py)
-  - One Figure &lt;—&gt; One Script
-    -  temp_vs_time.pdf &lt;—&gt;  temp_vs_time.py
-
-- LaTeX labelling:  `\label{fig:temp_vs_time}`
+4. That each output like a table or figure uses one script with the same
+   name:`temp_vs_time.pdf &lt;—&gt;  temp_vs_time.py` and that LaTeX labelling
+   follow this convention `\label{fig:temp_vs_time}`
 
 
+## On Directory Structure
 
-```
-paper_topic_name                       | string used for repo, tex, and bib files
-+   requirements.txt                   | number of pages,  etc
-+-- 1_submitted_paper
+Here are a few examples of directory structures have have worked for us:
+
+In this example, the versions of the paper are kept in their own directories:
+
+```{bash}
+paper_topic_name_dir_name              | string used for repo, tex, and bib files
++ requirements.txt                   | number of pages,  etc
++ 1_submitted_paper
 |   +-- paper_topic_name.tex
 |   +-- refs_topic_name.bib
 |   +-- journal_class.cls              | any files needed for the journal latex style
@@ -168,14 +250,14 @@ paper_topic_name                       | string used for repo, tex, and bib file
 |   |   +-- plot_temp_vs_time.py       | plotting scripts, use names like plot_.py
 |   |   `-- ...
 |   `-- submitted_paper_topic_name.pdf | actual PDF file submitted
-+-- 2_reviews
++ 2_reviews
 |   +-- review_1.pdf                   | individual reviews
 |   +-- review_2.pdf
 |   `-- editor_statement.pdf           | instructions and summary from editor
-+-- 3_response_to_reviews
++ 3_response_to_reviews
 |   +-- response_topic_name.tex
 |   `-- sent_response_topic_name.pdf   | actual PDF file sent to editor
-`-- 4_revised_paper
+` 4_revised_paper
     +-- paper_topic_name_revised.tex
     +-- refs_topic_name_revised.bib
     +-- journal_class.cls              | copy here any other files needed
@@ -190,13 +272,48 @@ paper_topic_name                       | string used for repo, tex, and bib file
 Reference: Matt West @ https://lagrange.mechse.illinois.edu/latex_quick_ref/
 ```
 
+In this version, which Jake uses, there are different git branches for
+different versions, and a single Makefile for all tasks (from turning the paper
+into a pdf file via LaTeX, to creating figures, etc.)
+
+```
+paper_topic_name_dir_name              | string used for repo, tex, and bib files           
++ Makefile                             | file that tracks file relationships                
++-- Data                               | directory for data and data cleaning, merging work
+    + README.md                        | file with instructions and explanations
+    + merge_data.R                     | 
+    + orig_data.csv                    | original data set, not to be changed
+    + merge_data.csv                   | 
+    `-- ...                            | 
++-- Analysis                           | 
+    + README.md                        | 
+    + linear_simulations.R             | file that runs simulations and saves output  
+    + linear_simulations.rda           | output from linear_simulations.R
+    `-- ...                            | 
++-- Figures                            | 
+    + README.md                        | 
+    + linear_simulations_N100.R        | file creating a figure 
+    + linear_simulations_N100.pdf      | the figure from linear_simulations_N100.R 
+    + descriptives.R                   | file creating a table 
+    + descriptives.tex                 | the table in LaTeX format 
+    `-- ...                            | 
++-- Paper                              | 
+    + README.md                        | 
+    + main.tex                         | the main LaTeX file
+    + abstract.tex                     | the abstract file 
+    `-- ...                            | 
++-- References                         |  
+    + big.bib                          | bibliography file
+    `-- ...                            | 
+```
+
+See also the discussion in @bowers2016future, section 3.
+
 ## Practice
 
 See the directory `3_workflows` and the `readme.md` file therein.
 
-
 # git version control: Use it!
-
 
 What to track:
 
