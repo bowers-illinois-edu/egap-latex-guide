@@ -659,8 +659,8 @@ Figures are central to the overall feel of your article.  Here are a few general
 for working with LaTeX and figures:
 
 - Fonts in figures should match the fonts in the float/article.  Notably, using `\includegraphics` to scale a figure will also change the font sizes; you should attempt to generate unscaled figures.
-  - Options for font matching in pdf figures using R: <https://cran.r-project.org/web/packages/tikzDevice>, <https://cran.r-project.org/web/packages/extrafont>
-  - Using Python and Matplotlib, you can specify your font through [`rcparams`](https://matplotlib.org/stable/tutorials/introductory/customizing.html)
+  - Options for font matching in pdf figures using R with [tikzDevice](https://cran.r-project.org/web/packages/tikzDevice) and [`extrafont`](https://cran.r-project.org/web/packages/extrafont)
+  - Using Python and Matplotlib, you can specify your font through `rcparams` [here](https://matplotlib.org/stable/tutorials/introductory/customizing.html)
 - Let's repeat that last point: *fonts in figures* should match the fonts of the article.
 - Insert graphics the `\includegraphics[]{}` command. For
 example, if we wanted to include a figure but scale it to 1/3 of the width of
@@ -718,7 +718,25 @@ you will consider the following "bad" figure and how to improve it in your LaTeX
 
 ![A terrible figure\label{fig:bad_figure}](bad_figure.png){ "width: 50%; margin: auto; text-align: center;" }
 
-## Ways to type a document using LaTeX markup
+# 10. Helpful tools
+
+- tikz: sharp figures and schematics in LaTeX
+- tikzpdf: build/rebuild tikzpictures
+   - <https://github.com/lukeolson/tikzpdf>
+- latexrun: compile and summarize warnings
+- chktex: a LaTeX linter
+- betterbib: automatically format/update your bib entries
+   - <https://github.com/nschloe/betterbib>
+- booktabs: nice looking tables
+- siunitx: nice looking numbers and units
+- algorithm2e: algorithm environment
+- cleveref: `\cref{}` referencing for all
+- hyperref: hyper linkes to figures, etc
+- backref: add page numbers to the bib
+- microtype: [[http://www.khirevich.com/latex/microtype/]{.ul}](http://www.khirevich.com/latex/microtype/)
+- enumitem: full control of itemize environments
+
+### Ways to type a document using LaTeX markup
 
 A LaTeX document is a plain text file. This means that you can use any text
 editor to write a LaTeX document. However, a text editor that (1) recognizes
@@ -728,38 +746,6 @@ and parentheses makes it easier to write LaTeX markup. To that end, we use
 gui](https://github.com/qvacua/vimr)) with
 [vimtex](https://github.com/lervag/vimtex) plugins but we know that there are
 many other approaches to typing a plain text document using LaTeX markup.
-
-Our friends who use LaTeX like the following systems. Each person prefers to interact with their computer differently, so we merely list what we've heard about here.
-
-- [Emacs with Auctex](https://kevinlanguasco.wordpress.com/2019/04/29/latex-editing-with-emacs-on-manjaro/)
-- [Neovim or Vim with vimtex or texlab]
-- [TexPad]() (we think this hides too many errors and warnings, so we think this is most useful so that you can go back to the command line)
-- [TexShop]() (we think this hides too many errors and warnings, so we think this is most useful so that you can go back to the command line)
-- [TeXstudio]
-- [Atom]
-- [Sublime 3]
-
-## Helpful tools
-
-- tikz: sharp figures and schematics in LaTeX
-- tikzpdf: build/rebuild tikzpictures
-   - <https://github.com/lukeolson/tikzpdf>
-- latexrun: compile and summarize warnings
-- chktex: a LaTeX linter
-- betterbib: automatically format/update your bib entries
-   - <https://github.com/nschloe/betterbib>
-- illinois-letterhead: a letterhead in LaTeX
-   - <https://github.com/lukeolson/illinois-letterhead>
-- scrub your LaTeX and submit to Arxiv:
-   - <https://github.com/lukeolson/clean-latex-to-arxiv.git>
-- booktabs: nice looking tables
-- siunitx: nice looking numbers and units
-- algorithm2e: algorithm environment
-- cleveref: `\cref{}` referencing for all
-- hyperref: hyper linkes to figures, etc
-- backref: add page numbers to the bib
-- microtype: [[http://www.khirevich.com/latex/microtype/]{.ul}](http://www.khirevich.com/latex/microtype/)
-- enumitem: full control of itemize environments
 
 ## Information about this document
 
