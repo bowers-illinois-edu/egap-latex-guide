@@ -1,6 +1,6 @@
 ---
-title: '10 Things to Know about How to Improve Your Academic Papers: From LaTeX to the Command Line'
-author: Luke Olson and Jake Bowers
+title: '10 Things to Know About Writing Academic Papers in LaTeX'
+author: Jake Bowers and Luke Olson
 link-citations: true
 numbersections: true
 colorlinks: true
@@ -15,38 +15,55 @@ html_document:
   theme: journal
 ---
 
-This guide shows you how to write a scientific article using the
-[LaTeX](https://en.wikipedia.org/wiki/LaTeX) document preparation and markup
-system. We emphasize typing commands at the [unix command
+Writing is a time-consuming process; writing high-quality publications requires attention
+to detail at every step of the way, from the actual prose on paper to its layout in
+the document to the presentation of figures.
+In this guide we walk you through 10 aspects of writing a scientific article using
+[LaTeX](https://en.wikipedia.org/wiki/LaTeX) to format your work.
+We emphasize typing commands at the [unix command
 line](https://en.wikipedia.org/wiki/Unix_shell) in this guide as a way for
-reader to see what is happening under the hood of the LaTeX engine and thus
-gain flexibility and power over the production of their own academic documents.
-We provide some links to graphical interfaces to LaTeX at the end of the
-document.
+you to peek under the hood of the LaTeX engine. This will allow you (the author!)
+power over the production of your own academic documents.
 
-To help people **practice** these commands we have a [Jupyter Lab](TODO)
-instance available within which you can start a Terminal session so that you
-can type the commands required to build a publication quality pdf from a LaTeX
-file. You can start this environment [here](TODO).
+This guide could be extremely long. There are *many*, *many* fantastic resources
+on typesetting. Here we have hand-selected 10 topics to help lower the barrier to a
+more efficient and higher quality paper writing workflow. Specifically we focus on
 
-To use LaTeX on your own computer, you will need to [install it](https://www.latex-project.org/get/).
+1. The **structure** of a document
+1. **What** are all of these tools? `tex`, `latex`, `pdflatex`, `xelatex`, `lualatex`, etc
+1. LaTeX **happy workflows** for your paper
+1. git and **version control**
+1. Journal **style**
+1. On **writing**, an interlude
+1. **Dos** and Don’ts
+1. On **bibliographies**
+1. On **figures**
+1. Handy **tools**
 
-# Structure and Markup
+We provide a pile links to graphical interfaces to LaTeX at the end of the
+document, however emphasizing that value of 
+
+To help people **practice** these commands we have hands-on examples ready in a [JupyterLab](TODO)
+session, through [Binder](https://mybinder.org/).  Here you can follow along, processing
+documents in a terminal session. You can start this environment [here](TODO).
+
+To use LaTeX on your own computer, you will need to [install it](https://www.latex-project.org/get/#tex-distributions) (we highly recommend following the links therein to TeX Live on each system).
+
+# 1. Structure and Markup
 
 A LaTeX document (or a `.tex` file) is a [plain
 text](https://en.wikipedia.org/wiki/Plain_text) document that contains commands
-that tell a processing program how to create a beautiful pdf. These commands
+that guides the LaTeX processing program how to create a beautiful pdf. These commands
 can be "markup" like `\textbf{this is bold}` for **bold text** or `$\alpha +
 \beta \frac{1}{x^2}$` for math like $\alpha + \beta \frac{1}{x^2}$ or commands
 that tell LaTeX about document structure like `\section{Introduction}` or even
-commands to print all of the bibliography like
+commands to identify a bibliography like
 `\bibliography{refs_example.bib}`.
 
 Once you have a plain text document with markup, you then process it using a
 set of programs to create a publishable output like a `.pdf` file.
-
-This figure shows a whole LaTeX document and explains at a high level what
-the parts of the document do..
+This figure shows an example of a LaTeX document and highlights different
+ parts of the document and their role.
 
 ![The Structure of a LaTeX document\label{fig:struct}](document_structure.png)
 
@@ -54,31 +71,27 @@ After processing that document (via, say, the command `latexmk -pdflatex
 example.tex`, assuming that the document is called `example.tex`), one can see
 a pdf file like the following image:
 
-![The associated pdf document\label{fig:struct_image}](document_structure_compiled.png){ style="width: 50%; margin: auto; text-align: center;" }
+![The associated pdf document\label{fig:struct_image}](document_structure_compiled.png){ style="width: 50%; margin: auto; text-align: center; border: 1px;" }
 
 ## Takeaways
 
-- The LaTeX system separates the creation of beautiful documents from the act
-   of efficiently and comfortably typing them.
-- Typing a document using LaTeX commands involves plain text --- which means
-   that you can type the commands in whatever way feels most efficient and
-   comfortable for you.
-- Processing a document once typed involves asking a computer to interpret the
-   commands you entered and to produce some output that, ideally (1) will not
-   change when different people view it (since you want control over how your
-   paper looks) and (2) is beautiful.
+- A LaTeX document is comprised of mainly two sections: preamble, which defines the styling, and the document text.
+- The LaTeX system separates concerns by allowing you to focus writing
+content in a plain text document, following by processing.
+- Processing the typed document delivers a layout that automatically handles spacing (as we will see later).
 
 ## Practice
 
 What does `example.tex` look like when compiled to a pdf document? Can you add
 a title or author? Can you make some text bold?^[Try out `\title{Some Paper}`
 and `\author{Some Person}` *in the preamble* and `\maketitle` just after the
-`\begin{document}` line.] You can practice by looking at the directory
-`1_structure` in the Jupyter Lab window that launches when you clink on `launch
-binder` from the `README.md` file in the the [associated github
-repository](https://github.com/bowers-illinois-edu/egap-latex-guide) and then
-clicking on the `Terminal` icon in the Jupyter Lab pane. Once you are there,
-try typing `latexmk -pdflatex example.tex` and then looking at the pdf.
+`\begin{document}` line.] You can practice by following these steps (and similar ones) later sections:
+
+1. select the directory `1_structure` in the JupyterLab window that launches when you clink on `launch
+binder` from the `readme.md` file in the [associated github
+repository](https://github.com/bowers-illinois-edu/egap-latex-guide)
+2. Then clicking on the `Terminal` icon in the JupyterLab pane
+3. Once you are there, try typing `latexmk -pdflatex example.tex` and then looking at the pdf.
 
 You can also copy the github repository to your own local machine and launch
 the Terminal to see a Unix command prompt if you are using a Mac or Linux
@@ -87,10 +100,10 @@ more involved to install
 it](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
 
-# Flavors and Programs: tex, latex,  pdflatex, etc
+# 2. Flavors and Programs: `tex`, `latex`,  `pdflatex`, etc
 
 Although the most basic program that parses markup is called `latex`, in
-current daily use, you will mostly find yourself using `pdflatex` or `xelatex`
+current daily use, you will mostly find yourself using `pdflatex` or even `xelatex`
 or maybe `lualatex`.
 
 When [Donald Knuth](https://en.wikipedia.org/wiki/Donald_Knuth) created this
@@ -105,30 +118,27 @@ Here is a list of the common programs that one might use to create a pdf file fr
 
 - `tex`: a program that typesets TeX directives or macros
 - `pdftex`: a program that generates a PDF (instead of DVI)
-- `latex`: a program that typesets a pile of LaTeX macros to make things
-  easier
+- `latex`: a program that typesets a pile of LaTeX directives and macros
+- `pdflatex`: a program that generates a PDF from LaTeX
 - `bibtex`: a program to take bibliographic information from a `.aux` file
   (created by a run of `latex` or `pdflatex` etc.) and generates a
   bibliography.
 - `biber`: a program like bibtex but with more database management
   capabilities.
-- `pdflatex`: a program that generates a PDF
 - `xelatex`: support for a wide variety of fonts and characters (you can type
   `xelatex example.tex` after [changing the
   font](https://www.overleaf.com/learn/latex/XeLaTeX) to one that is installed
   on your system).
 - `lualatex`: extends latex so that more programming can be done within it
-  (via Lua for more complicate document designs and workflows. See [here for
-  more on
-  lualatex](https://www.overleaf.com/learn/latex/Articles/An_Introduction_to_LuaTeX_(Part_1):_What_is_it—and_what_makes_it_so_different%3F)).
+  (via Lua for more complicate document designs and workflows. See [here for more on lualatex](https://www.overleaf.com)). TODO fix link
 
-For example, at the Unix command prompt in the Terminal, you might type
+For example, at the command prompt in the Terminal, you might type
 `pdflatex example.tex` create an `example.pdf` file (if you only do it once,
 the citation will show up as a `?` and no bibliography will be printed).
 
 Notice also:
 
-- `pdflatex` (or `xelatex` or `lualatex`) takes several passes --- must be run
+- `pdflatex` (or `xelatex` or `lualatex`) takes several passes --- it must be run
    more than one time --- if your document involves citations or other more
    complex features (like cross-references, tables of contents, etc.).
 - Tools like `latexmk` or `latexrun` automate this process of multiple passes
@@ -141,14 +151,12 @@ Notice also:
 
 You can replace those multiple lines with a single call to `latexmk -pdflatex example.tex`.
 
-
 ## Takeaways
 
-- always use LaTeX markup: very rarely (if ever) should you need to dip into
+- Always use LaTeX markup: very rarely (if ever) should you need to dip into
    plain TeX
-- always use PDF output (pdflatex) and PDF figures (or PNG ... more on this
-   later) rather than DVI or PS format for sharing documents
-
+- Always use PDF output (`pdflatex`) and PDF figures (or PNG ... more on this
+   later) rather than DVI or PS format for sharing generated documents
 
 ## Practice
 
@@ -156,15 +164,15 @@ See the directory `2_texflavors` and the `readme.md` file therein. Can you
 change the font and use `xelatex` to make a pdf, say, trying `latexmk -xelatex
 example.tex`?
 
-# LaTeX workflows
+# 3. LaTeX workflows
 
-A given scientific paper will require many files. For example, a research team
-may split the document into multiple  `.tex` files (`intro.tex`, `results.tex`,
-etc.) and then combine them for compilation into one big `main.tex`; many
-papers involve multiple `.pdf` files for figures, `.tex` files for tables, and
-at least one `.bib` file for bibliographies.
+A given scientific paper will require many files and often involves many
+authors. For example, several `.tex` files (for different sections), multiple
+figures (in the form of `.pdf`s), and bibliographis (in `.bib` files) may all
+be part of the paper.  Organizing these files is a consistent fashion will
+lead to a clear process when dealing with revisions at a later date.
 
-For example a `main.tex` file might look like this:
+As a specific example a `main.tex` file might look like this:
 
 ```{.latex}
 \documentclass{article}
@@ -195,50 +203,41 @@ Figure~\ref{fig:vaccine_by_pop} shows that opposition to vaccination peaks at a 
 
 ```
 
-That number `100,000` and the figure `vaccine_by_pop.pdf` came from an R
-command file called `vaccine_by_pop.R` which relied on data cleaned by
-`vaccine_data_cleaning.py` plus other files which downloaded data from the web
-and cleaned and merged the data together.
+The number `100,000` and the figure `vaccine_by_pop.pdf` are derived from the R
+file called `vaccine_by_pop.R`. This R file relies on data that is cleaned by
+`vaccine_data_cleaning.py`, in addition to data that are downloaded, cleaned, and merged from the web.
 
-Collaborators require guides or maps to understand how files relate to each
-other (see section 3 of @bowers2016future).
-
-There are two main complementary approaches to managing this collaboration [@bowers2016future]:
-
-- "File organization can be a map itself" .
-- Provide an input-output map using files like a `Makefile`, `README.md`, `requirements.txt`
-
-## Takeaways
-
-We recommend that:
-
- 1. you agree upon and commit to one approach for at least one project;
- 2. that you follow the general advice from the [Zen of Python](https://www.python.org/dev/peps/pep-0020/#id2)
+So how do we organize the data, the files, and the overall workflow? There are many possibilities, but we're reminded by a slice of the [Zen of Python](https://www.python.org/dev/peps/pep-0020/#id2):
 
 > Simple is better than complex.
 Complex is better than complicated.
 Flat is better than nested.
 
- 3. that you separate:
-  - Data collection or raw data  (e.g.  `data1.csv, …, datan.csv`)
+We provide two specific examples of workflows below, first noting two aspects
+that will greatly improve your process.  The **first** is to separate your data
+from your processing and presentation:
+
+  - Data collection or raw data  (e.g.  `data1.csv, ..., datan.csv`)
   - Parsed or processed data (e.g.  `data_merged_filtered.db`)
   - Plotting data (e.g.  `temp_vs_time.csv`)
   - Plotting script (e.g.  `temp_vs_time.py`)
 
-4. That each output like a table or figure uses one script with the same
-   name:`temp_vs_time.pdf &lt;—&gt;  temp_vs_time.py` and that LaTeX labelling
-   follow this convention `\label{fig:temp_vs_time}`
-
+The **second** aspect, directly related to the LaTeX, is to establish a predictable
+naming convention.  For example, each output like a table or figure uses one script with the same
+name:`temp_vs_time.pdf &lt;—&gt;  temp_vs_time.py` and that LaTeX labelling
+follow this convention `\label{fig:temp_vs_time}`.  When editing the document, the path from figure to the associated plotting script and related data is then clear.
 
 ## On Directory Structure
 
-Here are a few examples of directory structures have have worked for us:
+Here are a two examples of directory structures have have worked for us:
 
-In this example, the versions of the paper are kept in their own directories:
+In this example,
+we use [Matt West's directory structure](https://lagrange.mechse.illinois.edu/latex_quick_ref/),
+where the versions of the paper are kept in their own directories:
 
 ```{bash}
 paper_topic_name_dir_name              | string used for repo, tex, and bib files
-+ requirements.txt                   | number of pages,  etc
++ requirements.txt                     | number of pages,  etc
 + 1_submitted_paper
 |   +-- paper_topic_name.tex
 |   +-- refs_topic_name.bib
@@ -275,9 +274,9 @@ paper_topic_name_dir_name              | string used for repo, tex, and bib file
 Reference: Matt West @ https://lagrange.mechse.illinois.edu/latex_quick_ref/
 ```
 
-In this version, which Jake uses, there are different git branches for
-different versions, and a single Makefile for all tasks (from turning the paper
-into a pdf file via LaTeX, to creating figures, etc.)
+An alternative approach uses git branches for
+different versions, and a single `Makefile` for all tasks (from turning the paper
+into a pdf file via LaTeX, to creating figures, etc.). See also the discussion in @bowers2016future, section 3.
 
 ```{bash}
 paper_topic_name_dir_name              | string used for repo, tex, and bib files
@@ -310,13 +309,18 @@ paper_topic_name_dir_name              | string used for repo, tex, and bib file
     `-- ...                            |
 ```
 
-See also the discussion in @bowers2016future, section 3.
+## Takeaways
+
+- Separate data from processing from presentation.
+- Create consistent labels in the LaTeX to script that generates it to the associated data.
+- Commit to a workflow!  Anything is better than nothing and
+from the [Zen of Python](https://www.python.org/dev/peps/pep-0020/#id2) `Now is better than never.`
 
 ## Practice
 
 See the directory `3_workflows` and the `readme.md` file therein.
 
-# On collaboration
+# 4. On collaboration
 
 Here we discuss our process for writing papers with others (and ourselves as we
 revise papers, return to old papers, respond to re-analyses, etc.. in the future)
