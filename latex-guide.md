@@ -45,7 +45,8 @@ document, however emphasizing that value of
 
 To help people **practice** these commands we have hands-on examples ready in a [JupyterLab](TODO)
 session, through [Binder](https://mybinder.org/).  Here you can follow along, processing
-documents in a terminal session. You can start this environment [here](TODO).
+documents in a terminal session. You can start this environment here:
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bowers-illinois-edu/egap-latex-guide/HEAD?urlpath=lab).
 
 To use LaTeX on your own computer, you will need to [install it](https://www.latex-project.org/get/#tex-distributions) (we highly recommend following the links therein to TeX Live on each system).
 
