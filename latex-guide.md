@@ -548,15 +548,11 @@ See `example.tex` in `7_dos` for examples of use.
 
 ### DON'T mess with LaTeX spacing and placement
 
-Central to TeX is an algorithm for placing and spacing figures and text so that you don't have to.  Float environments (figure, table, etc) should be attached to the paragraph of their first reference.  **Avoid** use of `\FloatBarrier`, `\newpage`, `\vspace`, `\hspace`, etc to muscle your own spacing.
-```tex
-In Figure~\ref{fig:example} we highlight an example.
-%
-\begin{figure}
-  ...
-  \captions{A caption}\label{fig:example}
-\end{figure}
-```
+Central to TeX is an algorithm for placing and spacing figures and text so that
+you don't have to.  Float environments (figure, table, etc) should be attached
+to the paragraph of their first reference (more in the next section).
+**Avoid** use of `\FloatBarrier`, `\newpage`, `\vspace`, `\hspace`, etc to
+muscle your own spacing. ```
 
 ## Takeaways
 
@@ -627,25 +623,21 @@ BibTeX file for this essay:
 
 See the directory `8_citations` and the `readme.md` file therein.
 
-# On Figures and Tables and Math
+# 9. On Figures and Tables and Math
 
 Figures, tables, and math break up the text of a document and convey
-information that can make or break your attempts to persuade with your paper.
-We have a few suggestions about how to make these elements work with instead of
-against you here.
-
+information that can make or break the overall flow of your story.
 In general, if a figure or table has been created using code, your project
-should have a figure or table creation file like `linear_simulations_N100.R` which
-creates one figure in pdf format `linear_simulations_N100.pdf`. This figure
+should have a figure or table script: `linear_simulations_N100.R`
+creates one figure `linear_simulations_N100.pdf`. This figure
 creation file might require as input another file with simulation results, and
-in turn the simulation results creator file may need some data: we might notate
-this dependence among files like in our `Makefile`. For example in line 1
+in turn the simulation results creator file may need data;
+this dependency may be described in a `readme` or `Makefile`. For example in line 1
 `Data/clean_data.csv: Data/clean_data.R Data/raw_data.csv` means that the file
 `Data/clean_data.csv` depends on `Data/clean_data.R Data/raw_data.csv` (is
 created by the `.R` file and the `.csv` file together). And line 2 is a command
 used to create `Data/clean_data.csv` (in this case, the command is `R ---file
 Data/clean_data.R`.
-
 
 ```{.makefile .numberLines}
 Data/clean_data.csv: Data/clean_data.R Data/raw_data.csv
@@ -658,53 +650,43 @@ Figures/linear_simulations_N100.pdf: Figures/linear_simulations_N100.R Analysis/
     R --file Figures/linear_simulations_N100.R
 ```
 
-In general Figures, Tables, and Math should appear close to where they are
-discussed in the text. Do not put them at the end of your document if you don't
-want a grumpy reader: recall that most people are reading pdf documents on screens.
+In general figures, tables, and math should appear close to where they are
+discussed in the text.
 
 ## Figures
 
-- Tell LaTeX where to look for graphics using the `\graphicspath{}` command in
-the preamble.  For example, we use `\graphicspath{{.}{../Figures/}}`.
+Figures are central to the overall feel of your article.  Here are a few general tips
+for working with LaTeX and figures:
 
-- We insert graphics into documents using the `\includegraphics[]{}` command. For
+- Fonts in figures should match the fonts in the float/article.  Notably, using `\includegraphics` to scale a figure will also change the font sizes; you should attempt to generate unscaled figures.
+  - Options for font matching in pdf figures using R: <https://cran.r-project.org/web/packages/tikzDevice>, <https://cran.r-project.org/web/packages/extrafont>
+  - Using Python and Matplotlib, you can specify your font through [`rcparams`](https://matplotlib.org/stable/tutorials/introductory/customizing.html)
+- Let's repeat that last point: *fonts in figures* should match the fonts of the article.
+- Insert graphics the `\includegraphics[]{}` command. For
 example, if we wanted to include a figure but scale it to 1/3 of the width of
 the text (the area within the left and right margins), we would use:
-`\includegraphics[width=0.3\textwidth]{myfig.pdf}`{.latex}.
-
-- Fonts in figures should match the fonts in the float/article. Note that using `\includegraphics` to scale a figure will also change the font sizes --- be careful to ensure your figure text is easy to read.
-  - Options for font matching in pdf figures using R: <https://cran.r-project.org/web/packages/tikzDevice>, <https://cran.r-project.org/web/packages/extrafont>
-
+```{.latex}
+\includegraphics[width=0.3\textwidth]{myfig.pdf}`
+```
 - You should attach a float environment after the paragraph of first reference. For example:
-
 ```{.latex}
 Figure~\ref{fig:vaccine_by_pop} shows that opposition to vaccination peaks at a population of 100,000.
-
-\begin{center}
+%
 \begin{figure}[!ht]
-\includegraphics[width=.8\textwidth]{vaccine_by_pop.pdf}
-\caption{Vaccination opposition by population}\label{fig:vaccine_by_pop}
+  \centering
+  \includegraphics[width=.8\textwidth]{vaccine_by_pop.pdf}
+  \caption{Vaccination opposition by population}\label{fig:vaccine_by_pop}
 \end{figure}
-\end{center}
 ```
-
 - Generally use `\begin{figure}[!ht]` or `\begin{table}[!ht]`
-- `!` tex will ignore area restrictions
-- `h` place it “here” if it fits in the area
-- `t` place it at the “top” otherwise and if it fits otherwise create a new page
-
-- Don't use `\FloatBarrier` and other tricks like `\newpage`, `\vspace` or `\hspace` for spacing
-
+  - `!` tex will ignore area restrictions
+  - `h` place it “here” if it fits in the area
+  - `t` place it at the “top” otherwise and if it fits otherwise create a new page
 - Use consistent color schemes in all figures throughout the paper.
+- A reader should not have to hunt in the text to understand a figure:
+  - Do not introduce new notation in a figure or its caption.
+  - The figure caption should describe, not discuss.
 
-- Label everything. (TODO expand)
-
-- Do not introduce new notation in a figure or its caption. A reader should not have to hunt in the text to understand a figure.
-
-- The figure caption should describe, not discuss. A reader should not have to
-  hunt in the text to understand a figure.
-
-![A terrible figure\label{fig:bad_figure}](bad_figure.png)
 
 ## Tables
 
@@ -717,8 +699,6 @@ Figure~\ref{fig:vaccine_by_pop} shows that opposition to vaccination peaks at a 
   few lines as possible. (See [this nice short guide on
   tables](https://people.inf.ethz.ch/markusp/teaching/guides/guide-tables.pdf)).
 
-The figure caption should describe, not discuss. A reader should not have to hunt in the text to understand a figure.
-
 ## Math
 
 Math fonts should work with the main font of the article. For examples of good
@@ -727,11 +707,16 @@ Catalogue](https://tug.org/FontCatalogue/mathfonts.html).
 
 ## Takeaways
 
-TODO
+- Fonts in your figures should match the fonts in your document.
+- Pay attention to consistency; consistent colors, consistent labeling, etc
+- Each tables and figures should have an associated script.
 
 ## Practice
 
-See the directory `9_figures` and the `readme.md` file therein.
+See the directory `9_figures` and the `readme.md` file therein.  In particular,
+you will consider the following "bad" figure and how to improve it in your LaTeX document.
+
+![A terrible figure\label{fig:bad_figure}](bad_figure.png){ "width: 50%; margin: auto; text-align: center;" }
 
 ## Ways to type a document using LaTeX markup
 
@@ -753,21 +738,6 @@ Our friends who use LaTeX like the following systems. Each person prefers to int
 - [TeXstudio]
 - [Atom]
 - [Sublime 3]
-
-# Journal Style (TEMPTED TO DROP THIS)
-
-The journal will have a style file. For example, see:  <https://www.siam.org/publications/journals/about-siam-journals/information-for-authors#dnn_ctr2112_ContentPane>
-
-
-- The journal will also have a style *guide*. For example, see:  <https://www.siam.org/Portals/0/Publications/Journals/stylemanual/SIAM_STYLE_GUIDE_2019.pdf>
-
-Following both of these will speed up the review and copy editing.
-
-## Practice
-
-See the directory `5_style` and the `readme.md` file therein.
-
-# Extra:
 
 ## Helpful tools
 
