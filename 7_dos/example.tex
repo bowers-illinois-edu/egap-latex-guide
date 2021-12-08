@@ -74,4 +74,20 @@ experiment 1 & 19929  & 0.32 & 0.8 & 55\\
 %
 \lipsum[3-3]
 
+Consider the PDE with boundary conditions
+% TODO should we add extra alignment?
+\begin{subequations}
+  \begin{align}
+    -\nabla \cdot \nabla u & = f \quad \text{in $\Omega$}\\
+                         u & = g \quad \text{on $\partial\Omega$}.
+  \end{align}
+\end{subequations}
+Then again we also have the following in 2D\@:
+\begin{equation}
+\begin{split}
+  \mathcal{L} u & = -\Delta u\\
+                & = -\nabla \cdot \nabla u\\
+                & = -u_{xx} -u_{yy}
+\end{split}
+\end{equation}
 \end{document}

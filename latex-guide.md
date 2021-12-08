@@ -467,44 +467,102 @@ Here, we offer a few directions that improve your writing specifically in LaTeX:
 
 See the directory `6_linting` and the `readme.md` file therein.
 
-# LaTeX dos and don'ts
+# 7. LaTeX dos and don'ts
 
-Here are some facts about how to use LaTeX. Obviously not just opinions. :)
-(LUKE: Maybe you can add some examples etc. here?)
+You will find that authors have their own macros, their own style in the `.tex` document,
+and they're own preferences when using LaTeX.  Here we offer general principles that can
+help improve your overall LaTeX workflow:
 
-DO keep your LaTeX readable!
+#### DO keep your LaTeX readable!
 
 - Block indent equations
+```tex
+\begin{align}
+  \langle u, v \rangle & = \langle f, v\rangle\\
+                       & = G(v)
+\end{align}
+```
 - Align tabular data
-- Limit whitespace
+```tex
+  \begin{tabular}{lrllr}
+  \toprule
+                 & \multicolumn{1}{c}{$n$}
+                 & \multicolumn{1}{c}{$t$}
+                 & \multicolumn{1}{c}{$\rho$}
+                 & \multicolumn{1}{c}{$m$} \\
+  \midrule
+    experiment 1 & \num{    19929} & 0.32 & 0.8    & 55  \\
+    experiment 2 & \num{  7729292} & 0.78 & 0.7    & 85  \\
+    experiment 3 & \num{888173928} & 1.25 & 0.65   & 2   \\
+  \bottomrule
+  \end{tabular}
+```
+- Limit whitespace in the `.tex` file
 
-DON'T overuse macros
+#### DON'T overuse macros
 
-- Intended for complex arrangements with repeated use
-- Things that might change.
+- Macros are intended for complex arrangements with repeated use.
+```tex
+\newcommand{\Hcurl}{\vec{H}(\text{curl},\Omega)}
+```
+- Macros are useful when notation might change that might change.
+```tex
+\renewcommand{\vec}[1]{\boldsymbol #1}
+```
+- Macros are not shorthand; use them sparingly as others will find your `.tex` source unreadable.
 
-DO use packages for consistent layouts
+#### DO use packages for consistent layouts
 
-- booktabs: provides clean horizontal lines for tables (avoid vertical lines).
-- siunitx: to format large numbers and notation
+- `booktabs`: provides clean horizontal lines for tables (avoid vertical lines), providing `\toprule` and `\bottomrule` in the example above.
+- `siunitx`: to format large numbers and notation, providing `\num` in the example above.
+![High quality table\label{fig:tabluar}](tabular.png){ style="width: 50%; margin: auto; text-align: center;" }
 
-DON'T use `\begin{align}` for everything, instead try specific environments built for your purpose.
+#### DON'T use `\begin{align}` for everything, instead try specific environments built for your purpose.
 
-- equation: base
-- align: multiple equations
-- split: one equation split with alignment
-- multline: one equation split with no alignment
+- `equation` is your base equation environment.  Use this unless you have multiple equations.
+- `align` should be used for multiple equations that require alignment.
+- `split` is used for a *single* equation that requires alignment when split.
+- `multline` is used for a *single* equation where no alignment is needed.
+- `subequations` may be used around `align` to retain a single equation numbering
 
-DO use consistent fonts throughout (including within figures).
+See `example.tex` in `7_dos` for examples of use.
 
-- Label figures with \label{fig:easy_figure_name}
-- Label equations with \label{eq:useful_equation_name}
-- Label sections with \label{sec:i_can_remember_this_section_name}
-- Label tables with \label{tab:what_a_great_table_name}
+#### DO use consistent fonts throughout (including within figures).
+
+- Label figures with `\label{fig:easy_figure_name}`
+```tex
+\begin{figure}[!ht]
+  \centering
+  \includegraphics{example.pdf}
+  \captions{A caption}\label{fig:example}
+\end{figure}
+```
+- Label equations with `\label{eq:useful_equation_name}`
+```tex
+\begin{equation}\label{eq:Axb}
+  A x = b
+\end{equation}
+```
+- Label sections with `\label{sec:i_can_remember_this_section_name}`
+- Label tables with `\label{tab:what_a_great_table_name}`
+
+### DON'T mess with LaTeX spacing and placement
+
+Central to TeX is an algorithm for placing and spacing figures and text so that you don't have to.  Float environments (figure, table, etc) should be attached to the paragraph of their first reference.  **Avoid** use of `\FloatBarrier`, `\newpage`, `\vspace`, `\hspace`, etc to muscle your own spacing.
+```tex
+In Figure~\ref{fig:example} we highlight an example.
+%
+\begin{figure}
+  ...
+  \captions{A caption}\label{fig:example}
+\end{figure}
+```
 
 ## Takeaways
 
-TODO
+- Keep your `.tex` document readable
+- Use macros strategically and sparingly
+- Packages can help provide more consistent formatting
 
 ## Practice
 
