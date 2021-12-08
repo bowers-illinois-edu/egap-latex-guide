@@ -568,56 +568,60 @@ In Figure~\ref{fig:example} we highlight an example.
 
 See the directory `7_dos` and the `readme.md` file therein.
 
-# On citations and bibliographies
+# 8. On citations and bibliographies
 
 The LaTeX system allows you to (1) insert citations in your text using commands
 like `\cite{ChOlSe_2021_lsrbm}` which can turn into `[7]`, `(Chaudhry et al.,
-2021)`,  `[Ch21]` or other citation styles within the text itself and also (2)
+2021)`,  `[Ch21]`, or other citation styles within the text itself and also (2)
 to print out your bibliography, formatted according to your journal's
 guidelines, using a single command in the LaTeX document like
 `\bibliography{mybib.bib}`. Separating formatting from information saves time:
 hundreds of citations will be printed automatically in the correct format if
 desired including only the sources you cited. If you decide that you no longer
-need a citation, this will be automatically removed from your bibliography.
+need a citation, this will be removed from your bibliography automatically.
 Journals often provide formatting guidelines in `.bst` files that can be
 referred to in the `\bibliographystyle{}` command.
 
 The program `bibtex` (or `biber`) reads `.aux` files created by latex programs
-and creates a `.bbl` file which is then read by the latex program to format
-everything (above we showed the need to run latex, bibtex, latex, and latex in
-order for example, in order to make this work).
+and creates a `.bbl` file which is then read by the LaTeX program to format
+everything (above we showed the need to run `pdflatex`, `bibtex`, `pdflatex`, and `pdflatex` in
+order to generate citations).
+![The Structure of a LaTeX document with BIB\label{fig:bib_struct}](bib_structure.png){ style="width: 66%; margin: auto; text-align: center;" }
 
-In order to use this system, you need a plain text file that is a database with
+To use `bibtex`, you need a plain text file that is a database with
 entries formatted in BibTeX format. For example, here is one entry in the
 BibTeX file for this essay:
 
 ```{.bibtex}
 @article{ChOlSe_2021_lsrbm,
-	author = {Chaudhry, Jehanzeb H. and Olson, Luke N. and Sentz, Peter},
-	doi = {10.1137/20M1323552},
+	author  = {Chaudhry, Jehanzeb H. and Olson, Luke N. and Sentz, Peter},
+	doi     = {10.1137/20M1323552},
 	journal = {SIAM Journal on Scientific Computing},
-	number = {2},
-	pages = {A1081-A1107},
-	title = {A Least-Squares Finite Element Reduced Basis Method},
-	url = {https://doi.org/10.1137/20M1323552},
-	volume = {43},
-	year = {2021}}
+	number  = {2},
+	pages   = {A1081-A1107},
+	title   = {A Least-Squares Finite Element Reduced Basis Method},
+	url     = {https://doi.org/10.1137/20M1323552},
+	volume  = {43},
+	year    = {2021}
+}
 ```
 
 ## General workflow
 
-- Grab full citation online at citation’s journal and/or Google Scholar [see
+- Typically you do not need to write your own `.bib` entry. Grab the full citation online at citation’s journal and/or Google Scholar [see
   instructions here for getting BibTeX formatted entries from Google
   Scholar](https://texblog.org/2014/04/22/using-google-scholar-to-download-bibtex-citations/)
-- Clean up entry (removing abstracts or other fields)
+- Clean up entry (removing abstracts or other fields).  Align as desired for readability.
 - Format cleanly.  Use `{ }` instead of `“ “`
-- `{ }` also force capitalization: `title = {All about {Krylov} methods}`
+- `{ }` also force capitalization: for example `title = {All about {Krylov} methods}`
+- *Important*: some journal require specific fields in certain `.bib` entries.  This can generate warnings.
 
-![The Structure of a LaTeX document with BIB\label{fig:bib_struct}](bib_structure.png)
 
 ## Takeaways
 
+- Use BibTex to organize your bibliography.
 - You will only need to add a BibTeX entry to your bibliography database (your `.bib` file) once. (And you can use tools like [Zotero](https://guides.library.iit.edu/c.php?g=720120&p=6296986) and [BibDesk](https://bibdesk.sourceforge.io) to make managing those collections of bibliographic information easier.)
+- Clean bibliographic entries reduce error and accelerate the process.
 
 ## Practice
 
