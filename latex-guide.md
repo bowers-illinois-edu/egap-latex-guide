@@ -322,43 +322,43 @@ See the directory `3_workflows` and the `readme.md` file therein.
 
 # 4. On collaboration
 
-Here we discuss our process for writing papers with others (and ourselves as we
-revise papers, return to old papers, respond to re-analyses, etc.. in the future)
+Often your writing is often interleaved with edits and contributions from co-authors.
+How do you track changes and version in your LaTeX document?
 
 ## Collaborating asychronously: git version control
 
-We use [git version control via the github
-interface](https://github.com/git-guides) as a part of our collaboration (with
-others, or versions of ourselves responding to reviewers, making revisions, etc.)
+We strongly recommend [git version control via github](https://github.com/git-guides),
+either when working along on a document or when multiple authors are involved.
+We do not git describe it in-depth here, but instead offer the following high-level
+*best* practices.
 
-We do not describe it in-depth here. Given some knowledge about git, we advise
-the following practices:
+What files should you track (in version control)?
 
-What to track:
-
-- Your `.tex file`
-- The `.bib` file (either a global one used across your projects or one created for your specific project)
+- Your `.tex file`!
+- The `.bib` file for your article
 - Figures -&gt;  `./figures/*.pdf`
 - Scripts for the figures -&gt; `./data/*.py` , `./data/*.R`
 - Data for the figures -&gt; ` ./data/*.csv`
+- Any item you need to reproduce your paper that you cannot generate in your paper directory
 
-What not to track:
+What should you **not** track (in version control)?
 
 - Any data with personally identifying information or information that cannot ethically be made public.
 - The pdf of the paper -&gt;  `paper_randnoise.pdf`
 - Any typesetting output -&gt; ` *.log`, `*.bbl`, `*.aux`, etc
+- `.DS_Store` or other garbage from your system
 
-Tips for using git to track versions and changes among co-authors in writing a LaTeX paper:
+Version control is invaluable as a collaboration tool, however it does require diligence
+when working with co-authors on a LaTeX document. We recommend the following recipe:
 
-- Agree with your co-authors about how you will organize the text in your documents. We have used on one of
-   - one sentence per line
-   - hard wrapping at say 80 characters
-   - nothing, free for all (plus or minus pre-commit automatic reformatting or checking of files).
-- Commit *often*
-- For large edits, take sections at a time, to reduce merge conflicts
-- Before you commit and push the repository for collaborators you need to do a
-   clean recompile at the command line.
-
+- Agree with your co-authors on how you will organize the text in your documents. Specifically address expectations on
+   - one sentence per line (of the LaTeX document)?
+   - hard wrapping at say 80 characters?
+   - nothing, free for all (plus or minus pre-commit automatic reformatting or checking of files)?
+- Commit changes *often*
+- For large edits, take specific sections at a time, to reduce merge conflicts
+- Before you commit and push, clean your LaTeX compile (`latexmk myfile.tex -C`) and recompile to verify there are **no** errors.
+- In the rare event when style files rely on a specific version, consider tracking the style file in your paper repository.
 
 ## Collaborating synchronously
 
@@ -373,38 +373,56 @@ There are other systems for editing plain text at the same time such as [Teletyp
 
 ## Takeaways
 
-- Writing a scientific paper is an act of collaboration --- with a team at the
-   same time, with yourself in the future, perhaps with those who will download
-   your data and code and try to learn from it after it is published. So, you
-   have to think about and talk about collaboration when you set out to write a
-   paper.
-- Use the git system for version control whether or not you also work
-   synchronously.
-- TODO
+- Agree on a tracking strategy with your collaborators
+- Do not add generated files such as log files to the repository
+- Do add files (such as figures, even though generated) in order to build the paper
+- Use the git for version control.
 
 ## Practice
 
 See the directory `4_git` and the `readme.md` file therein.
 
-# On Writing: An interlude…
+# 5. Style
+
+The overarching *style* of your document is often decided by the journal.  With
+this in mind, it is best to typeset your document with the journal's style
+file.  The Society for Industrial and Applied Mathematics (SIAM) provides
+[style files directly](https://www.siam.org/publications/journals/about-siam-journals/information-for-authors#dnn_ctr2112_ContentPane)
+whereas others, e.g. American Mathematical Society journals, are included with
+your TeX distribution and available in
+[CTAN](https://ctan.org/pkg/amsart?lang=en). In any case, committing and not
+deviating from the expected format will accelerate your time-to-publication by
+not slowing down the copy editing at the journal. The style files will provide
+macros for author formats, custom figure environments, and almost certainly the
+preferred style for the bibilography. In addition, most journal provide a
+*style guide* that will detail the expectations on punctuation, hyphens, commas, etc.
+
+## Takeaways
+
+- Follow the journal style files and guides.  It will save time.
+
+## Practice
+
+See directory `5_style` and `readme.md` for an example.
+
+# 6. On Writing: An interlude…
 
 You already know Hemingway's famous quote: "the only kind of writing is
 re-writing". However, you might not know about linters.
 
-## On Linters
+## Linters?
 
-A linter is a program that analyzes the text that you write as you write it.
-When your mis-spelled words are highlighted in your email client, you are
-seeing the results of a linter alerting you to improve your text. Linters are
-also used in programming --- catching code errors before you need to run the
-code, for example, by alerting you to unmatched parentheses or missing
-semi-colons or the like.
+A linter is a program that analyzes your text (sometimes in realtime, as you
+write it). When your mis-spelled words are highlighted in your email client,
+you are seeing the results of a linter alerting you to improve your text.
+Linters are also used in programming --- catching code errors before running
+the code, by alerting you to unmatched parentheses or missing semi-colons.
 
-Other linters can look for **style problems**. Consider the following terrible sentence:
+Other linters can look for issues with **style**. Consider the following terrible sentence:
 
 > More research is needed to fill the gap created in extant literature in order to impact policy with very important findings.
 
-One of our linters, the [write-good](https://github.com/btford/write-good) linter, alerted us to some problems:
+One linter, the [write-good](https://github.com/btford/write-good), highlights several potential problems:
 
 ```
 col 16 error| [write-good] "is needed" may be passive voice [E]
@@ -412,37 +430,38 @@ col 71 error| [write-good] "in order to" is wordy or unneeded [E]
 col 102 error| [write-good] "very" is a weasel word and can weaken meaning [E]
 ```
 
-Of course, linters cannot do it all. We like them because they draw attention
-to sentences which may need work. We bet that most readers of this guide would
-be able to re-write that sentence without using the passive voice, without
-using "impact" as a verb (yuck!), and with a stronger justification for
+Of course, linters cannot do it all. We use them because they draw attention
+to sentences that may need work. Ultimately they (hopefully) help focus our
+attention on prose: re-writing the sentence without using a passive voice, without
+using "impact" as a verb (!), and with a stronger justification for
 research than to just fill a gap in the literature.
 
 ## Tips and Tricks
 
-Some tips that work for us:
+There are many fantastic tips and guides to improving your writing, from
+reading paragraphs and sentences out loud to "edit by ear" @howardsbecker1986a
+to guides specific to academic writing: @gopen1990science and @howardsbecker1986a.
+Here, we offer a few directions that improve your writing specifically in LaTeX:
 
-- Read paragraphs and sentences out loud to "edit by ear" @howardsbecker1986a.
-- Step away from your writing for a day or more in order to come back to it
-  with fresh eyes.
-- We recommend the following two guides to academic writing: @gopen1990science and @howardsbecker1986a.
-- We routinely use [alex](https://alexjs.com),
-  [proselint](http://proselint.com), and
-  [write-good](https://github.com/btford/write-good) for our writing. The [LanguageTool](https://languagetool.org) also looks promising.
-- Avoid constantly re-compiling your document to see how it looks unless you
-  are working on difficult diagrams and mathematics. Your first task is writing
-  not reading.
-- Mark open items and second pass items with  `%TODO`. You can find all places
-  where you have `%TODO` in your document using: `grep TODO
+- Linters such as [alex](https://alexjs.com), [proselint](http://proselint.com), and
+  [write-good](https://github.com/btford/write-good) can be integrated into many
+  text editors (such as [vim](https://www.vim.org/) to highlight your `.tex` document
+  on-the-fly.
+- In general, avoid the urge to constantly re-compile your document to view its output (figures/diagrams are a different case). Your first task is writing not reading.
+- Mark open items and second pass items with  `% TODO`, a comment in the `.tex` file. You can find all places
+  where you have `% TODO` in your document using: `grep TODO
   paper_randnoise.tex`
-- Clear contributions, Outline, Write/Revise
-- Polish and make it look visually appealing to read at the end.
+- Outline. Write. Revise.
+- Polish and make it look visually appealing!
 
 ## Takeaways
 
--  Peer reviewed publications are critically important to science —-- treat your writing and presentation of results with care
--  Peer reviewed publications take reviewer/editor time -— treat your writing and presentation of results with care
--  (Hopefully) Many people will read your publication -— treat your publication with care
+- Peer reviewed publications are critically important to science
+  - *the quality of your presentation is important!*
+- Peer reviewed publications take reviewer/editor time
+  - *the quality of your presentation is important!*
+- (Hopefully) Many people will read your publication
+  - *the quality of your presentation is important!*
 
 ## Practice
 
