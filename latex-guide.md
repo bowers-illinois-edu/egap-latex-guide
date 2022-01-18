@@ -15,15 +15,20 @@ html_document:
   theme: journal
 ---
 
-Writing is a time-consuming process; writing high-quality publications requires attention
-to detail at every step of the way, from the actual prose on paper to its layout in
-the document to the presentation of figures.
-In this guide we walk you through 10 aspects of writing a scientific article using
-[LaTeX](https://en.wikipedia.org/wiki/LaTeX) to format your work.
-We emphasize typing commands at the [unix command
-line](https://en.wikipedia.org/wiki/Unix_shell) in this guide as a way for
-you to peek under the hood of the LaTeX engine. This will allow you (the author!)
-power over the production of your own academic documents.
+Writing is a time-consuming process; writing high-quality publications requires
+attention to detail at every step of the way, from the actual prose on paper to
+its layout in the document to the presentation of figures.  In this guide we
+walk you through 10 aspects of writing a scientific article using
+[LaTeX](https://en.wikipedia.org/wiki/LaTeX) to format your work and save you
+time.  We emphasize typing commands at the [unix command
+line](https://en.wikipedia.org/wiki/Unix_shell) in this guide as a way for you
+to peek under the hood of the LaTeX engine. This will allow you (the author!)
+power over the production of your own academic documents.^[We have decided to
+write this guide in a very opinionated way. And we emphasize the nitty gritty of
+technical document creation. If these opinions inspire a reader to write a 10
+Things Guide on using Markdown or Google Docs please do write one! As an
+open-source document, we are also happy to receive pull requests for
+improvements to this guide.]
 
 This guide could be extremely long. There are *many*, *many* fantastic resources
 on typesetting. Here we have hand-selected 10 topics to help lower the barrier to a
@@ -40,8 +45,7 @@ more efficient and higher quality paper writing workflow. Specifically we focus 
 1. On **figures**
 1. Handy **tools**
 
-We provide a pile links to graphical interfaces to LaTeX at the end of the
-document, however emphasizing that value of 
+<!-- We provide a pile of links to graphical interfaces to LaTeX at the end of the document, however emphasizing that value of  -->
 
 To help people **practice** these commands we have hands-on examples ready in a [JupyterLab](TODO)
 session, through [Binder](https://mybinder.org/).  Here you can follow along, processing
