@@ -1,0 +1,73 @@
+[?1049h[22;0;0t[?1h=[H[2J]11;?[?2004h[?25h[?25l(B[m[H[2J[23BExecuting: augroup nvim_terminal[K[H[23M
+Executing: autocmd![K
+Executing: autocmd BufReadCmd term://* nested :if !exists('b:term_title')|call t
+ermopen( matchstr(expand("<amatch>"), '\c\mterm://\%(.\{-}//\%(\d\+:\)\?\)\?\zs.
+*'), {'cwd': expand(get(matchlist(expand("<amatch>"), '\c\mterm://\(.\{-}\)//'),
+ 1, ''))})|endif[K
+Executing: augroup END[K
+chdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[K
+chdir(/etc/xdg//nvim)[K
+chdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[K
+could not source "/etc/xdg//nvim/sysinit.vim"[K
+chdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[K
+chdir(/usr/local/Cellar/neovim/HEAD-6fef28d_2/share/nvim)[K
+chdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[K
+could not source "$VIM/sysinit.vim"[K
+chdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[K
+chdir(/Users/jwbowers/.config/nvim)[K
+chdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[K
+sourcing "/Users/jwbowers/.config/nvim/init.vim"[K
+line 1: "set runtimepath^=~/.vim runtimepath+=~/.vim/after[K
+line 2: "let &packpath = &runtimepath[K
+line 3: " source ~/.vimrc[K
+line 4: set tabstop     =4[K
+-- More --[K]112[1 q]112[1 q[?25h[?25l[?1004h[?25h[?25l[24;1H[10Xline 5: set softtabstop =4[H[23M
+line 6: set shiftwidth  =4[K
+line 7: set expandtab[K
+line 8: " Search {{{[K
+line 9: set incsearch       " search as characters are entered[K
+line 10: set hlsearch        " highlight matche[K
+line 11: set ignorecase      " ignore case when searching[K
+line 12: set smartcase       " ignore case if search pattern is lower case[K
+line 13: " case-sensitive otherwise[K
+line 14:[K
+line 15:[K
+line 16: " vim-plug stuff[K
+line 17: " Specify a directory for plugins[K
+line 18: " - For Neovim: stdpath('data') . '/plugged'[K
+line 19: " - Avoid using standard Vim directory names like 'plugin'[K
+line 20: call plug#begin('~/.config/nvim/plugged')[K
+Searching for "autoload/plug.vim" in "/Users/jwbowers/.config/nvim,/etc/xdg/nvim
+,/Users/jwbowers/.local/share/nvim/site,/usr/local/share/nvim/site,/usr/share/nv
+im/site,/usr/local/Cellar/neovim/HEAD-6fef28d_2/share/nvim/runtime,/usr/local/Ce
+llar/neovim/HEAD-6fef28d_2/lib/nvim,/usr/share/nvim/site/after,/usr/local/share/
+nvim/site/after,/Users/jwbowers/.local/share/nvim/site/after,/etc/xdg/nvim/after
+,/Users/jwbowers/.config/nvim/after"[K
+Searching for "/Users/jwbowers/.config/nvim/autoload/plug.vim"[K
+-- More --[K[?25h[?25l[24;1H[10XSearching for "/etc/xdg/nvim/autoload/plug.vim"[H[M[23B-- More --[K[?25h[?25l[24;1H[10XSearching for "/Users/jwbowers/.local/share/nvim/site/autoload/plug.vim"[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xchdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xchdir(/Users/jwbowers/.local/share/nvim/site/autoload)[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xchdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[H[23M
+line 20: sourcing "/Users/jwbowers/.local/share/nvim/site/autoload/plug.vim"[K
+line 1: " vim-plug: Vim plugin manager[K
+Error detected while processing /Users/jwbowers/.local/share/nvim/site/autoload/
+plug.vim:[K
+line    1:[K
+Interrupted[K
+finished sourcing /Users/jwbowers/.local/share/nvim/site/autoload/plug.vim[K
+continuing in /Users/jwbowers/.config/nvim/init.vim[K
+Searching for "autoload/plug.vim" in "/Users/jwbowers/.config/nvim,/etc/xdg/nvim
+,/Users/jwbowers/.local/share/nvim/site,/usr/local/share/nvim/site,/usr/share/nv
+im/site,/usr/local/Cellar/neovim/HEAD-6fef28d_2/share/nvim/runtime,/usr/local/Ce
+llar/neovim/HEAD-6fef28d_2/lib/nvim,/usr/share/nvim/site/after,/usr/local/share/
+nvim/site/after,/Users/jwbowers/.local/share/nvim/site/after,/etc/xdg/nvim/after
+,/Users/jwbowers/.config/nvim/after"[K
+Searching for "/Users/jwbowers/.config/nvim/autoload/plug.vim"[K
+Searching for "/etc/xdg/nvim/autoload/plug.vim"[K
+Searching for "/Users/jwbowers/.local/share/nvim/site/autoload/plug.vim"[K
+chdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[K
+chdir(/Users/jwbowers/.local/share/nvim/site/autoload)[K
+chdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[K
+line 20: sourcing "/Users/jwbowers/.local/share/nvim/site/autoload/plug.vim"[K
+line 1: " vim-plug: Vim plugin manager[K
+-- More --[K[?25h[?25l[24;1H[10X[H[M[23B-- More --[K[?25h[?25l[24;1H[10XInterrupted[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xfinished sourcing /Users/jwbowers/.local/share/nvim/site/autoload/plug.vim[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xcontinuing in /Users/jwbowers/.config/nvim/init.vim[H[M[23B-- More --[K[?25h[?25l[24;1H[10XError detected while processing /Users/jwbowers/.config/nvim/init.vim:[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xline   20:[H[M[23B-- More --[K[?25h[?25l[24;1H[10XInterrupted[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xfinished sourcing /Users/jwbowers/.config/nvim/init.vim[H[M[23B-- More --[K[?25h[?25l[24;1H[10XSearching for "filetype.vim" in "/Users/jwbowers/.config/nvim,/etc/xdg/nvim,/Us[H[M[23B[J[23;80He
+-- More --[K[?25h[?25l[24;1H[10X[H[M[23B-- More --[K[?25h[?25l[24;1H[10XSearching for "/Users/jwbowers/.config/nvim/filetype.vim"[H[M[23B-- More --[K[?25h[?25l[24;1H[10XSearching for "/etc/xdg/nvim/filetype.vim"[H[M[23B-- More --[K[?25h[?25l[24;1H[10XSearching for "/Users/jwbowers/.local/share/nvim/site/filetype.vim"[H[M[23B-- More --[K[?25h[?25l[24;1H[10XSearching for "/usr/local/share/nvim/site/filetype.vim"[H[M[23B-- More --[K[?25h[?25l[24;1H[10XSearching for "/usr/share/nvim/site/filetype.vim"[H[M[23B-- More --[K[?25h[?25l[24;1H[10XSearching for "/usr/local/Cellar/neovim/HEAD-6fef28d_2/share/nvim/runtime/filet[H[M[23B[J[23;80Hy
+-- More --[K[?25h[?25l[24;1H[10X[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xchdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xchdir(/usr/local/Cellar/neovim/HEAD-6fef28d_2/share/nvim/runtime)[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xchdir(/Users/jwbowers/Documents/PROJECTS/egap-latex-guide)[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xsourcing "/usr/local/Cellar/neovim/HEAD-6fef28d_2/share/nvim/runtime/filetype.v[H[M[23B[J[23;80Hi
+-- More --[K[?25h[?25l[24;1H[10X[H[M[23B-- More --[K[?25h[?25l[24;1H[10Xline 1: " Vim support file to detect file types[H[M[23B-- More --[K[?25h[?25l[24;1H[10X[H[M[23B-- More --[K[?25h

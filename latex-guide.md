@@ -47,7 +47,7 @@ more efficient and higher quality paper writing workflow. Specifically we focus 
 
 <!-- We provide a pile of links to graphical interfaces to LaTeX at the end of the document, however emphasizing that value of  -->
 
-To help people **practice** these commands we have hands-on examples ready in a [JupyterLab](TODO)
+To help people **practice** these commands we have hands-on examples ready in a [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/)
 session, through [Binder](https://mybinder.org/).  Here you can follow along, processing
 documents in a terminal session. You can start this environment here:
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bowers-illinois-edu/egap-latex-guide/HEAD?urlpath=lab).
@@ -56,27 +56,25 @@ To use LaTeX on your own computer, you will need to [install it](https://www.lat
 
 # 1. Structure and Markup
 
-A LaTeX document (or a `.tex` file) is a [plain
-text](https://en.wikipedia.org/wiki/Plain_text) document that contains commands
-that guides the LaTeX processing program how to create a beautiful pdf. These commands
-can be "markup" like `\textbf{this is bold}` for **bold text** or `$\alpha +
-\beta \frac{1}{x^2}$` for math like $\alpha + \beta \frac{1}{x^2}$ or commands
-that tell LaTeX about document structure like `\section{Introduction}` or even
-commands to identify a bibliography like
-`\bibliography{refs_example.bib}`.
+A LaTeX document (or a `.tex` file) is a [plain text](https://en.wikipedia.org/wiki/Plain_text) document that contains commands that tell the LaTeX processing program how to create a beautiful pdf. These commands can be "markup" like `\textbf{this is bold}` for **bold text** or `$\alpha + \beta \frac{1}{x^2}$` for math like $\alpha + \beta \frac{1}{x^2}$ or commands that tell LaTeX about document structure like `\section{Introduction}` or even commands to identify a bibliography like `\bibliography{refs_example.bib}`.
 
-Once you have a plain text document with markup, you then process it using a
-set of programs to create a publishable output like a `.pdf` file.
-This figure shows an example of a LaTeX document and highlights different
- parts of the document and their role.
+Once you have a plain text document with markup, you then process it using a set of programs to create a publishable output like a `.pdf` file.  This figure shows an example of a LaTeX document and highlights different parts of the document and their role.
+
+<center>
 
 ![The Structure of a LaTeX document\label{fig:struct}](document_structure.png)
 
-After processing that document (via, say, the command `latexmk -pdflatex
-example.tex`, assuming that the document is called `example.tex`), one can see
+</center>
+
+
+Say the document is called `example.tex`. After processing that document via, say, the command `latexmk -pdflatex example.tex`, one can see
 a pdf file like the following image:
 
-![The associated pdf document\label{fig:struct_image}](document_structure_compiled.png){ style="width: 50%; margin: auto; text-align: center; border: 1px;" }
+<center>
+
+![Above see an image of the pdf document associated with the <code>example.tex</code> file\label{fig:struct_image}](document_structure_compiled.png){ style="width: 50%; margin: auto; text-align: center; border: 1px;" }
+
+</center>
 
 ## Takeaways
 
@@ -152,7 +150,11 @@ Notice also:
  The following figure shows how it may require three runs of `pdflatex` (plus a
  run of `bibtex`) to go from an `example.tex` file to an `example.pdf` file:
 
+<center>
+
  ![From LaTeX to PDF commands \label{fig:flavors}](from_tex_to_pdf.png)
+
+</center>
 
 You can replace those multiple lines with a single call to `latexmk -pdflatex example.tex`.
 
@@ -721,7 +723,11 @@ Catalogue](https://tug.org/FontCatalogue/mathfonts.html).
 See the directory `9_figures` and the `readme.md` file therein.  In particular,
 you will consider the following "bad" figure and how to improve it in your LaTeX document.
 
-![A terrible figure\label{fig:bad_figure}](bad_figure.png){ "width: 50%; margin: auto; text-align: center;" }
+<center>
+
+![A terrible figure\label{fig:bad_figure}](bad_figure.png){ style="width: 50%; margin: auto; text-align: center;" }
+
+</center>
 
 # 10. Helpful tools
 
@@ -743,8 +749,9 @@ you will consider the following "bad" figure and how to improve it in your LaTeX
 
 ### Ways to type a document using LaTeX markup
 
-A LaTeX document is a plain text file. This means that you can use any text
-editor to write a LaTeX document. However, a text editor that (1) recognizes
+A LaTeX document is a [plain text
+file](https://en.wikipedia.org/wiki/Plain_text). This means that you can use any [text
+editor](https://en.wikipedia.org/wiki/Text_editor) to write a LaTeX document. However, a text editor that (1) recognizes
 that `\textbf{}` is a LaTeX command or that (2) keeps track of matching braces
 and parentheses makes it easier to write LaTeX markup. To that end, we use
 [neovim](http://neovim.io) (sometimes with the [vimr
