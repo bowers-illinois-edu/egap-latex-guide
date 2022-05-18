@@ -2,6 +2,8 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/bowers-illinois-edu/egap-latex-guide/HEAD?urlpath=lab)
 
+https://mybinder.org/v2/gh/bowers-illinois-edu/egap-latex-guide/HEAD
+
 To build the html file for the EGAP Guide with less typing use R to convert the markdown to html so that the styles look like the other styles of the [EGAP Methods Guides](https://egap.org/methods-guides/) (see also <https://github.com/egap/methods-guides>).
 
 ```r
